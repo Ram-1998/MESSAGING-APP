@@ -2,11 +2,14 @@ var express = require("express");
 var mongo = require("mongodb");
 var mongoose = require("mongoose");
 var passport = require('passport');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var localStrategy = require('passport-local-roles').Strategy;
 var flash = require('connect-flash');
 var session = require('express-session');
 var expressValidator = require('express-validator');
 var route = require('./routes/index');
+
 //App init
 var app = express();
 
@@ -17,6 +20,12 @@ mongoose.connect("mongodb://localhost:27017/chatapp",{useMongoClient:true},()=>{
 	}
 );
 var db = mongoose.connection;
+
+
+//BodyParser Middleware
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 //Express Session
 app.use(session({
@@ -62,6 +71,8 @@ app.use(function (req, res, next) {
 //Satting Statis Directory
 app.use(express.static(__dirname))
 
+//Set routes
+app.use('/',route);
 
 //Connecting to port 3000
 app.listen("3000",()=>{

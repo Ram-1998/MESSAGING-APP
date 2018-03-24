@@ -39,5 +39,5 @@ Simple Messaging app using Node JS, Express, mongo and Socket.io
 
 ```
 
-##Developed By
-* **Shree Ram Bansal** [Linkedin](https://www.linkedin.com/in/shree-ram-b-a48786104/) [Facebook](https://www.facebook.com/shreeram.bansal)
+## Developed By
+* **Shree Ram Bansal** [Linkedin](https://www.linkedin.com/in/shree-ram-b-a48786104/) | [Facebook](https://www.facebook.com/shreeram.bansal)
