@@ -1,5 +1,5 @@
 # MESSAGING-APP
-Simple Messaging app using Node JS, Express mongo and Socket.io
+Simple Messaging app using Node JS, Express, mongo and Socket.io
 
 ### Prerequisites
 ```
@@ -21,19 +21,19 @@ Simple Messaging app using Node JS, Express mongo and Socket.io
 ```
 ```
 
-### (1) POST /sendmessage
+### (3) POST /sendmessage
 
 ```
 
 ```
 
-### (1) GET /inbox
+### (4) GET /inbox
 
 ```
 
 ```
 
-### (1) PUT /block/{username}
+### (5) PUT /block/{username}
 
 ```
 
