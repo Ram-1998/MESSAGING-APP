@@ -10,7 +10,7 @@ Simple Messaging app using Node JS, Express And MongoDB
 
 ### Documentation
 
-[Read Here](https://documenter.getpostman.com/view/3998711/simple-messaging-app/RVtvqYmv)
+[Read API documentation Here](https://documenter.getpostman.com/view/3998711/simple-messaging-app/RVtvqYmv)
 
 ## API Paths
 
