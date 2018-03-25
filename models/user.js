@@ -48,3 +48,7 @@ module.exports.comparePassword = function(password,database_password,callback){
 module.exports.blockUser = function(currUser,userToBlock,callback){
 	User.update({uname: currUser.uname},{$push:{blockedUsers: userToBlock}},callback);
 }
+
+module.exports.sendMessage = function(receiver,message,callback){
+	User.update({uname: receiver.uname},{$push:{messages: message}},callback);
+}

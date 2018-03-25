@@ -7,12 +7,25 @@ var md5 = require('md5');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
+//Ensure Authenticated
+
+function ensureAuthenticated(req,res,next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	else
+	{
+		req.flash('error_msg','You are not logged in');
+		res.redirect('/');
+	}
+}
+
 router.get('/',function(req,res){
 
 	// res.render('login_signup',{layout: 'layout_login_signup'});
 	// console.log('home page started');
 	if(req.isAuthenticated()){
-		res.json("User Logged In Already");
+		res.json("User Logged In !!");
 	}
 	else
 	{
@@ -21,7 +34,11 @@ router.get('/',function(req,res){
 
 });
 
-
+//logout
+router.get('/logout', function(req, res){
+	req.logout();
+	res.json("logout Succesfully");
+});
 
 //Register user
 router.post('/register',jsonParser,function(req,res){
@@ -152,34 +169,57 @@ router.get('/block/:userName',function(req,res){
 	console.log(userToBlock);
 	console.log(currUser);
 
-
-	User.blockUser(currUser,userToBlock,function(err,result){
+	if(currUser.blockedUsers.indexOf(userToBlock) == -1){
+		User.blockUser(currUser,userToBlock,function(err,result){
 			if(err) throw err;
 			console.log(currUser);
 			res.json("User "+currUser.fname+" Blocked User "+ userToBlock)
 		});
+	}
+	else
+		res.json("User Already Blocked");
+	
 
 
 });
 //End Block User
 
+//Send Message
+router.post('/sendmessage', function(req, res, next) {
+	console.log("In message send part !");
+	var messageSubject = req.body.subject;
+	var messageBody = req.body.body;
+	var recipient = req.body.recipient;
+	var currUser = req.user;
+
+	User.getUserByUname(recipient,function(err,receiver){
+		if(receiver.blockedUsers.indexOf(currUser.uname) == -1 ){
+			var message = {sender:currUser.uname,
+						   subject:messageSubject,
+						   body:messageBody};
+			User.sendMessage(receiver,message,function(err,result){
+				if(err) throw err;
+				console.log(receiver);
+				res.json("Message Sent Succesfully !!")
+			});			   
+		}
+		else{
+			res.json("Sorry you can't send message to "+ recipient);
+		}
+	});
+
+});
+
+//End Send Message
+
 //Inbox Messages
-//Block user
-router.get('/inbox',function(req,res){
+router.get('/inbox',ensureAuthenticated,function(req,res){
 	var currUser = req.user;
 	console.log(currUser);
 
 	res.json(currUser.messages);
-
-	// User.blockUser(currUser,userToBlock,function(err,result){
-	// 		if(err) throw err;
-	// 		console.log(currUser);
-	// 		res.json("User "+currUser.fname+" Blocked User "+ userToBlock)
-	// 	});
-
-
 });
 
-
+//End Inbox
 
 module.exports = router;
