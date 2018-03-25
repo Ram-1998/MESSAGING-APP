@@ -1,5 +1,5 @@
 var express = require("express");
-var mongo = require("mongodb");
+var mongodb = require("mongodb");
 var mongoose = require("mongoose");
 var passport = require('passport');
 var bodyParser = require('body-parser');
@@ -15,7 +15,7 @@ var app = express();
 
 
 //Creating Mongo connections
-mongoose.connect("mongodb://heroku_d08c5gmq:uckesi1qv2643m5555l1bcbr3s@ds223609.mlab.com:23609/heroku_d08c5gmq",{useMongoClient:true},()=>{
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/chatapp",{useMongoClient:true},()=>{
 		console.log("Database Connected");
 	}
 );
@@ -77,6 +77,6 @@ app.use(function (req, res, next) {
 app.use('/',route);
 
 //Connecting to port 3000
-app.listen("3000",()=>{
+app.listen(process.env.PORT || "3000",()=>{
 	console.log("Started App at port 3000");
 })
