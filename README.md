@@ -12,6 +12,10 @@ Simple Messaging app using Node JS, Express And MongoDB
 
 [Read API documentation Here](https://documenter.getpostman.com/view/3998711/simple-messaging-app/RVtvqYmv)
 
+### Live Link
+
+[Click here to use API](https://fathomless-shore-82374.herokuapp.com)
+
 ## API Paths
 
 ### (1) POST /login
