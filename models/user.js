@@ -19,6 +19,9 @@ module.exports.createUser = function(newUser,callback){
 	console.log(newUser.password);
 	newUser.save(callback);
 }
+module.exports.getUserById = function(id,callback){
+	User.findById(id,callback);
+}
 module.exports.getUserByUname = function(uname,callback){
 	console.log("Finding User By Username");
 	var query = {uname: uname};
@@ -36,4 +39,7 @@ module.exports.comparePassword = function(password,database_password,callback){
 		isMatch = false;
 	}
 	callback(null,isMatch);
+}
+module.exports.blockUser = function(currUser,userToBlock,callback){
+	User.update({uname: currUser.uname},{$push:{blockedUsers: userToBlock}},callback);
 }

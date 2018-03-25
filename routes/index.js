@@ -146,7 +146,7 @@ router.post('/login', function(req, res, next) {
 
 
 //login
-router.get('/apply/:userName',function(req,res){
+router.get('/block/:userName',function(req,res){
 	var userToBlock = req.params.userName;
 	var currUser = req.user;
 	console.log(userToBlock);
@@ -155,8 +155,8 @@ router.get('/apply/:userName',function(req,res){
 
 	User.blockUser(currUser,userToBlock,function(err,result){
 			if(err) throw err;
-			// console.log(currUser);
-			res.json("User "+currUser.name+" Blocked User "+ userToBlock)
+			console.log(currUser);
+			res.json("User "+currUser.fname+" Blocked User "+ userToBlock)
 		});
 
 

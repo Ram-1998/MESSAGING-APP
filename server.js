@@ -21,11 +21,14 @@ mongoose.connect("mongodb://localhost:27017/chatapp",{useMongoClient:true},()=>{
 );
 var db = mongoose.connection;
 
+//Satting Statis Directory
+app.use(express.static(__dirname));
 
 //BodyParser Middleware
-
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
 
 //Express Session
 app.use(session({
@@ -68,8 +71,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-//Satting Statis Directory
-app.use(express.static(__dirname))
+
 
 //Set routes
 app.use('/',route);
