@@ -20,9 +20,20 @@ module.exports.createUser = function(newUser,callback){
 	newUser.save(callback);
 }
 module.exports.getUserByUname = function(uname,callback){
-	console.log("Finding User By Email");
+	console.log("Finding User By Username");
 	var query = {uname: uname};
 	console.log(query);
 	User.findOne(query,callback);
 }
-
+module.exports.comparePassword = function(password,database_password,callback){
+	console.log("Matching Password");
+	console.log(password + " " + database_password);
+	var isMatch;
+	if(password == database_password ){
+		isMatch = true;
+	}
+	else {
+		isMatch = false;
+	}
+	callback(null,isMatch);
+}

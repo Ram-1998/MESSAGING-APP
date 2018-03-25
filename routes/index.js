@@ -84,6 +84,7 @@ passport.use(new LocalStrategy({
 		passwordField: 'password'
 	},
   function(username, password, done) {
+  	console.log("Finding User !!")
 	User.getUserByUname(username,function(err,user){
 		if(err) throw err;
 
@@ -128,17 +129,37 @@ passport.deserializeUser(function(id, done) {
 
 //login
 router.post('/login', function(req, res, next) {
+	console.log("try to log in !")
   passport.authenticate('local', function(err, user, info) {
     if (err) return next(err)
     if (!user) {
 			req.flash('error_msg', 'Invalid Details');
-      return res.redirect('/')
+      return res.json("imvaild credentials")
     }
     req.logIn(user, function(err) {
       if (err) return next(err);
-      return res.redirect('/users/dashboard');
+      	console.log("Logged In Succesfully")
+      return res.json("Hello " + user.fname);
     });
   })(req, res, next);
+});
+
+
+//login
+router.get('/apply/:userName',function(req,res){
+	var userToBlock = req.params.userName;
+	var currUser = req.user;
+	console.log(userToBlock);
+	console.log(currUser);
+
+
+	User.blockUser(currUser,userToBlock,function(err,result){
+			if(err) throw err;
+			// console.log(currUser);
+			res.json("User "+currUser.name+" Blocked User "+ userToBlock)
+		});
+
+
 });
 
 module.exports = router;
