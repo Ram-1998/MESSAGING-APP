@@ -143,9 +143,9 @@ router.post('/login', function(req, res, next) {
     });
   })(req, res, next);
 });
+//End Login
 
-
-//login
+//Block user
 router.get('/block/:userName',function(req,res){
 	var userToBlock = req.params.userName;
 	var currUser = req.user;
@@ -161,5 +161,25 @@ router.get('/block/:userName',function(req,res){
 
 
 });
+//End Block User
+
+//Inbox Messages
+//Block user
+router.get('/inbox',function(req,res){
+	var currUser = req.user;
+	console.log(currUser);
+
+	res.json(currUser.messages);
+
+	// User.blockUser(currUser,userToBlock,function(err,result){
+	// 		if(err) throw err;
+	// 		console.log(currUser);
+	// 		res.json("User "+currUser.fname+" Blocked User "+ userToBlock)
+	// 	});
+
+
+});
+
+
 
 module.exports = router;

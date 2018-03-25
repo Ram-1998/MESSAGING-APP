@@ -10,7 +10,12 @@ var UserSchema = mongoose.Schema({
 		required:true
 	},
 	password:String,
-	blockedUsers:[String]
+	blockedUsers:[String],
+	messages:[{
+		sender:String,
+		subject:String,
+		body:String
+	}]
 });
 var User = module.exports = mongoose.model('User',UserSchema);
 //Create User
