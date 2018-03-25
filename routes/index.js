@@ -162,7 +162,7 @@ router.post('/login', function(req, res, next) {
 //End Login
 
 //Block user
-router.get('/block/:userName',ensureAuthenticated,function(req,res){
+router.put('/block/:userName',ensureAuthenticated,function(req,res){
 	var userToBlock = req.params.userName;
 	var currUser = req.user;
 	console.log(userToBlock);
