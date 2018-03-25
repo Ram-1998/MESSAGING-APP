@@ -15,7 +15,6 @@ function ensureAuthenticated(req,res,next){
 	}
 	else
 	{
-		req.flash('error_msg','You are not logged in');
 		res.redirect('/');
 	}
 }
@@ -163,7 +162,7 @@ router.post('/login', function(req, res, next) {
 //End Login
 
 //Block user
-router.get('/block/:userName',function(req,res){
+router.get('/block/:userName',ensureAuthenticated,function(req,res){
 	var userToBlock = req.params.userName;
 	var currUser = req.user;
 	console.log(userToBlock);
@@ -185,7 +184,7 @@ router.get('/block/:userName',function(req,res){
 //End Block User
 
 //Send Message
-router.post('/sendmessage', function(req, res, next) {
+router.post('/sendmessage',ensureAuthenticated, function(req, res, next) {
 	console.log("In message send part !");
 	var messageSubject = req.body.subject;
 	var messageBody = req.body.body;

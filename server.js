@@ -15,7 +15,7 @@ var app = express();
 
 
 //Creating Mongo connections
-mongoose.connect("mongodb://localhost:27017/chatapp",{useMongoClient:true},()=>{
+mongoose.connect("mongodb://test:test123@ds123029.mlab.com:23029/chatapp",{useMongoClient:true},()=>{
 		console.log("Database Connected");
 	}
 );
