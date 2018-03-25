@@ -8,6 +8,9 @@ Simple Messaging app using Node JS, Express And MongoDB
 (3) Express
 ```
 
+### Documentation
+
+[Read Here](https://documenter.getpostman.com/view/3998711/simple-messaging-app/RVtvqYmv)
 
 ## API Paths
 
@@ -15,7 +18,6 @@ Simple Messaging app using Node JS, Express And MongoDB
 ```
 uname : String
 password : String
-
 ```
 ### (2) POST /register
 
@@ -33,7 +35,6 @@ confirm_password: String
 recipient : String
 subject : String
 body : String
-
 ```
 
 ### (4) GET /inbox
